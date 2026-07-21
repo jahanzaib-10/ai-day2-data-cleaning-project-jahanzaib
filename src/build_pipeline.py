@@ -97,7 +97,8 @@ def run_pipeline():
     generate_quality_report_csv()
     create_data_dictionary()
     
-    # 6. Save processed files (Individual clean files + final dataset)
+    # 6. Save processed files 
+    # (Individual clean files + final dataset)
     print("Step 6: Saving processed files...")
     os.makedirs("data/processed", exist_ok=True)
     
