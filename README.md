@@ -2,42 +2,44 @@
 
 To ensure a clean, modular, and maintainable project architecture, the following folder structure was implemented:
 
-```text
-day2-data-cleaning-project/
+day2-data-cleaning-project-jahanzaib/
 │
 ├── data/
-│   ├── raw/
-│   │   ├── customers.csv
-│   │   ├── products.csv
-│   │   └── orders.csv
+│   ├── processed/
+│   │   ├── clean_customers.csv
+│   │   ├── clean_orders.csv
+│   │   ├── clean_products.csv
+│   │   ├── final_sales_dataset.csv
+│   │   └── rejected_records.csv
 │   │
-│   └── processed/
-│       ├── clean_customers.csv
-│       ├── clean_products.csv
-│       ├── clean_orders.csv
-│       └── final_sales_dataset.csv
-│
-├── reports/
-│   ├── data_quality_report.csv
-│   └── data_quality_summary.md
-│
-├── src/
-│   ├── load_data.py
-│   ├── clean_data.py
-│   ├── validate_data.py
-│   └── build_pipeline.py
+│   └── raw/
+│       ├── customers.csv
+│       ├── orders.csv
+│       └── products.csv
 │
 ├── notebooks/
 │   └── day2_exploration.ipynb
 │
+├── reports/
+│   ├── data_dictionary.csv
+│   ├── data_quality_report.csv
+│   ├── data_quality_summary.md
+│   └── duplicate_records.csv
+│
 ├── sql/
 │   └── quality_checks.sql
 │
+├── src/
+│   ├── __pycache__/
+│   ├── __init__.py
+│   ├── build_pipeline.py
+│   ├── clean_data.py
+│   ├── load_data.py
+│   └── validate_data.py
+│
 ├── data_dictionary.csv
-├── requirements.txt
-└── README.md
-
-```
+├── README.md
+└── requirements.txt
 
 ## Important Rule
 
@@ -59,9 +61,9 @@ All three primary CSV files were loaded into memory using `pandas` to perform in
 
 ### Initial Dataset Observations
 
-* **Customers Dataset:** Contains customer demographic profiles. Initial profiling highlighted formatting inconsistencies in names and trailing whitespace characters inside email fields.
-* **Products Dataset:** Contains item-level catalog details. Observed that several `unit_price` fields were improperly stored as object/string types instead of numeric values.
-* **Orders Dataset:** Contains transactional line items. Identified missing customer/product foreign keys and occasional negative quantity anomalies that required intervention.
+**Customers Dataset** Contains customer demographic profiles. Initial profiling highlighted formatting inconsistencies in names and trailing whitespace characters inside email fields.
+**Products Dataset** Contains item-level catalog details. Observed that several `unit_price` fields were improperly stored as object/string types instead of numeric values.
+**Orders Dataset** Contains transactional line items. Identified missing customer/product foreign keys and occasional negative quantity anomalies that required intervention.
 
 ---
 
