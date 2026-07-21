@@ -1,0 +1,5 @@
+order_id,customer_id,product_id,order_date,quantity,discount,payment_status,sales_channel,customer_name,email,phone,city,registration_date,customer_type,product_name,category,unit_price,stock_quantity,supplier_name,gross_amount,discount_amount,net_amount
+ORD1001,IIUI101,PROD201,2026-07-10,4.0,0.1,Paid,Online,Jahanzaib,jahanzaib@gmail.com,0300-1234567,Lahore,2025-01-10,Retail,Laptop,Electronics,,15.0,Tech Supplier,,,
+ORD1002,IIUI102,PROD202,2026-07-12,,0.1,Pending,Store,Sara Ahmed,sara.ahmed@yahoo.com,0321-9876543,Lahore,2025-02-15,Corporate,Smartphone,Electronics,1200.0,,Global Traders,,,
+ORD1004,,PROD204,2026-07-15,5.0,0.05,Pending,Online,,,,,,,Desk Lamp,Furniture,,50.0,Lighting Corp,,,
+ORD1005,IIUI105,,2026-07-16,2.0,0.15,Paid,Store,Bilal Ahmed,bilal@gmail.com,0302-9988776,Islamabad,,Retail,,,,,,,,

@@ -1,0 +1,6 @@
+order_id,customer_id,product_id,order_date,quantity,discount,payment_status,sales_channel
+ORD1001,IIUI101,PROD201,2026-07-10,4,10%,Paid,Online
+ORD1002,IIUI102,PROD202,2026-07-12,-2,0.10,Pending,Store
+ORD1001,IIUI103,PROD203,2028-01-01,3,10,Refunded,Phone
+ORD1004,,PROD204,2026-07-15,5,0.05,,Online
+ORD1005,IIUI105,,2026-07-16,2,15%,Paid,Store

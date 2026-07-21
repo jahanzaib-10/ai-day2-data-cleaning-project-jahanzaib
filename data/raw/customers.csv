@@ -1,0 +1,6 @@
+customer_id,customer_name, email,phone,city,registration_date,customer_type
+IIUI101,Jahanzaib,Jahanzaib@gmail.com,0300-1234567,lahore,2025-01-10,Retail
+IIUI102,Sara Ahmed,sara.ahmed@yahoo.com,0321-9876543,LAHORE,2025-02-15,Corporate
+IIUI103,Alisha,alisha@gmail.com,0333-5554433,lhr,2024-11-20,Wholesale
+IIUI104,      ,aisha@gmail.com,0312-1122334,khi,2025-03-01,Retail
+IIUI105,Bilal Ahmed, BILAL@gmail.com,0302-9988776,isb,  ,Retail

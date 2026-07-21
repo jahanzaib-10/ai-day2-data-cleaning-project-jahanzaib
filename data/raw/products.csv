@@ -1,0 +1,6 @@
+product_id,product_name,category,unit_price,stock_quantity,supplier_name
+PROD201, Laptop ,electronics,-500.0,15,Tech Supplier
+PROD202,Smartphone,Electronics,1200.0,TEXT_STOCK,Global Traders
+PROD203,Office Chair,furniture,150.0,-5,
+PROD204,Desk Lamp,Furniture,twenty,50,Lighting Corp
+PROD205,Notebook,stationery,5.0,200,Stationery Hub

@@ -1,0 +1,14 @@
+Column Name,Dataset,Description,Data Type,Nullable,Example,Validation Rule
+order_id,Orders,Unique order identifier,String,No,ORD1001,Must be unique and not null
+customer_id,Customers/Orders,Unique customer identifier,String,No,CUST101,Must match customer records
+product_id,Products/Orders,Unique product identifier,String,No,PROD501,Must match product records
+quantity,Orders,Number of items ordered,Integer,No,4,Must be greater than 0
+unit_price,Products/Orders,Price per unit of product,Float,No,45.50,Must be positive numeric
+discount,Orders,Discount as decimal,Float,Yes,0.10,Between 0.0 and 1.0
+order_date,Orders,Date order was placed,Datetime,No,2026-01-15,"Valid timestamp, not future"
+customer_name,Customers,Full name of the customer,String,Yes,John Doe,Title case text
+email,Customers,Customer email address,String,Yes,john@example.com,Valid email format
+city,Customers,City of residence,String,Yes,Lahore,Standardized text
+product_name,Products,Name of the product,String,No,Wireless Mouse,Non-empty string
+category,Products,Product category,Category,Yes,Electronics,Predefined category list
+net_amount,Calculated,Final payable amount after discounts,Float,No,163.80,Calculated value >= 0

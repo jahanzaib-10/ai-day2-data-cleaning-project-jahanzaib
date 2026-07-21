@@ -1,0 +1,8 @@
+Metric,Before Cleaning,After Cleaning,Cleaning Action,Severity,Final Status,Notes
+Total rows,2000,1940,Invalid records separated,Information,Resolved,Base volume processed
+Missing customer IDs,47,0,Records moved for review,High,Flagged / Investigated,Isolated for audit
+Duplicate order IDs,35,0,Exact duplicates removed,Critical,Cleaned,Primary keys sanitized
+Invalid quantities,18,0,Invalid records rejected,High,Removed,Dropped non-positive values
+Invalid dates,12,0,Dates corrected or flagged,Medium,Standardized,Coerced using pandas
+Unmatched customers,26,26,Retained with match flag,Medium,Retained for review,Left join preserved
+Unmatched products,17,9,Retained for investigation,Low,Monitored,Checked via indicator
