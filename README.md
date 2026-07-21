@@ -2,6 +2,7 @@
 
 To ensure a clean, modular, and maintainable project architecture, the following folder structure was implemented:
 
+```text
 day2-data-cleaning-project-jahanzaib/
 │
 ├── data/
@@ -40,6 +41,8 @@ day2-data-cleaning-project-jahanzaib/
 ├── data_dictionary.csv
 ├── README.md
 └── requirements.txt
+
+```
 
 ## Important Rule
 
