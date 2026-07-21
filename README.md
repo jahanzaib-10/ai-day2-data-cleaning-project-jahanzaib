@@ -1,3 +1,137 @@
+# Part 1: Project Setup
+
+To ensure a clean, modular, and maintainable project architecture, the following folder structure was implemented:
+
+```text
+day2-data-cleaning-project/
+│
+├── data/
+│   ├── raw/
+│   │   ├── customers.csv
+│   │   ├── products.csv
+│   │   └── orders.csv
+│   │
+│   └── processed/
+│       ├── clean_customers.csv
+│       ├── clean_products.csv
+│       ├── clean_orders.csv
+│       └── final_sales_dataset.csv
+│
+├── reports/
+│   ├── data_quality_report.csv
+│   └── data_quality_summary.md
+│
+├── src/
+│   ├── load_data.py
+│   ├── clean_data.py
+│   ├── validate_data.py
+│   └── build_pipeline.py
+│
+├── notebooks/
+│   └── day2_exploration.ipynb
+│
+├── sql/
+│   └── quality_checks.sql
+│
+├── data_dictionary.csv
+├── requirements.txt
+└── README.md
+
+```
+
+## Important Rule
+
+Files inside the `data/raw/` folder are treated as an immutable source of truth and must never be edited, modified, or overwritten directly.
+
+---
+
+## Part 2: Load and Inspect the Data
+
+All three primary CSV files were loaded into memory using `pandas` to perform initial exploratory data profiling.
+
+### Inspection Metrics Covered
+
+* Total number of rows and columns.
+* Column names and active data types.
+* First five and last five records preview.
+* Missing-value and duplicate-record counts.
+* Unique-value cardinality and comprehensive summary statistics.
+
+### Initial Dataset Observations
+
+* **Customers Dataset:** Contains customer demographic profiles. Initial profiling highlighted formatting inconsistencies in names and trailing whitespace characters inside email fields.
+* **Products Dataset:** Contains item-level catalog details. Observed that several `unit_price` fields were improperly stored as object/string types instead of numeric values.
+* **Orders Dataset:** Contains transactional line items. Identified missing customer/product foreign keys and occasional negative quantity anomalies that required intervention.
+
+---
+
+## Part 3: NumPy Quality Checks
+
+NumPy was integrated to execute fast, vectorized numerical validations and conditional data classifications:
+
+* **Anomaly Detection:** Flagged negative quantities, prices below zero, and impossible numeric values, securely replacing them with `np.nan`.
+* **Statistical Calculations:** Computed minimum, maximum, mean, and median metrics across numerical arrays.
+*Conditional Classifications (`np.select`)* Categorized transactions into distinct business tiers based on calculated order values using vectorized conditions
+
+```python
+conditions = [
+    orders["order_value"] < 1000,
+    orders["order_value"].between(1000, 5000),
+    orders["order_value"] > 5000
+]
+labels = ["Low Value", "Medium Value", "High Value"]
+orders["order_value_category"] = np.select(
+    conditions,
+    labels,
+    default="Unknown"
+)
+
+```
+
+## Part 4: Clean the Customer Dataset (`clean_customers`)
+
+A dedicated reusable function named `clean_customers()` was built to standardize customer profiles:
+
+1. Standardized column names to a uniform snake_case convention.
+2. Removed unnecessary leading and trailing whitespace.
+3. Converted customer names to **Title Case** and email addresses to lowercase.
+4. Stripped internal spaces from email strings and standardized regional city names.
+5. Parsed registration timestamps into standard datetime formats while identifying unparseable invalid dates.
+6. Detected duplicate customer IDs and established strict rules for handling missing attributes safely without corrupting personal data integrity.
+
+---
+
+## Part 5: Clean the Product Dataset (`clean_products`)
+
+A reusable function named `clean_products()` was implemented to clean catalog data:
+
+1. Standardized product names and category groupings.
+2. Converted `unit_price` to proper floating-point numeric types and `stock_quantity` to nullable integers.
+3. Replaced invalid negative values and handled missing supplier names using standard placeholder text (`"Not Provided"`).
+4. Detected duplicate product IDs and flagged products with missing prices or invalid stock values.
+5. Ensured faulty records were never silently deleted; instead, they were corrected, replaced with nulls, flagged, or routed to a rejected-records dataset.
+
+---
+
+## Part 6: Clean the Orders Dataset (`clean_orders`)
+
+A robust function named `clean_orders()` was structured to process transaction logs:
+
+1. Standardized column names and dropped completely empty rows.
+2. Converted order dates to datetime objects and quantities to numeric values.
+3. Normalized discounts into a consistent decimal format.
+4. Standardized payment statuses and sales channel categories.
+5. Detected duplicate order IDs, negative/zero quantities, and anomalous future order dates.
+6. Handled missing foreign keys and created an automated issue-status tracking column:
+
+```python
+orders["record_status"] = np.where(
+    orders["customer_id"].isna() | orders["product_id"].isna(),
+    "Needs Review",
+    "Valid"
+)
+
+
 # Part 7: Missing-Value Treatment Strategy
 
 Below is the missing-value treatment table explaining how missing values are handled across different columns and the reasoning behind each strategy.
